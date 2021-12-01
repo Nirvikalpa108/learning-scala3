@@ -1,19 +1,28 @@
+import DomainModelling.TriathlonDistance
+
 @main def hello: Unit =
-  println("Hello World")
-  println(competition(2))
-  println(competition2(3))
+  println(DomainModelling.triathlon(TriathlonDistance.Run))
+  println(DomainModelling.population2(DomainModelling.Continent.Africa))
 
-def competition(result: Int): String =
-  if result == 1 then "gold"
-  else if result == 2 then "silver"
-  else if result == 3 then "bronze"
-  else "well done!"
+object Example {
+  case class Rating(googleRating: Option[Int], netflixRating: Option[Int])
 
-def competition2(result: Int): String = result match
-  case 1 => "gold"
-  case 2 => "silver"
-  case 3 => "bronze"
-  case _ => "well done!"
+  case class Film(name: String, rating: Option[Rating])
+
+  val mulan: Film = Film("Mulan", Some(Rating(Some(2), Some(4))))
+
+  val averageRating = for {
+    rating <- mulan.rating
+    googleRating <- rating.googleRating
+    netflixRating <- rating.netflixRating
+    if googleRating > 1
+    averageRating = (googleRating + netflixRating) / 2
+  } yield averageRating
+}
+
+
+
+
 
 
 
