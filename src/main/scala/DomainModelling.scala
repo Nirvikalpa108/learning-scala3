@@ -1,5 +1,3 @@
-import DomainModelling.TriathlonDistance.Swim
-
 object DomainModelling {
 
   // case classes
@@ -22,8 +20,7 @@ object DomainModelling {
   val currentCrustSize = Small
 
   // if/then
-  if (currentCrustSize == Large)
-    println("You get a prize!")
+  if currentCrustSize == Large then println("You get a prize!")
 
   // match
   currentCrustSize match
@@ -31,42 +28,76 @@ object DomainModelling {
     case Medium => println("medium")
     case Large => println("large")
 
-  enum Color(val rgb: Int):
-    case Red extends Color(0xFF0000)
-    case Green extends Color(0x00FF00)
-    case Blue extends Color(0x0000FF)
+//  enum Color(val rgb: Int):
+//    case Red extends Color(0xFF0000)
+//    case Green extends Color(0x00FF00)
+//    case Blue extends Color(0x0000FF)
+//
+//  import Color.*
+//  val c = Red
 
-  import Color.*
-  val c = Red
+  enum TrafficLight:
+    case Red, Amber, Green
 
-  // my examples
-  enum UnitedKingdom:
-    case England, northernIreland, Scotland, Wales
+  import TrafficLight.*
+  def drivingSignal(light: TrafficLight): String =
+    if light == Red then "Stop"
+    else if light == Amber then "Get Ready"
+    else "Go"
 
-  enum TriathlonDistance(val metres: Int):
-    case Swim extends TriathlonDistance(400)
-    case Cycle extends TriathlonDistance(10000)
-    case Run extends TriathlonDistance(2500)
+  def drivingSignal2(trafficLight: TrafficLight): String = trafficLight match {
+    case Red => "Stop"
+    case Amber => "Get Ready"
+    case Green => "Go"
+  }
 
-  val triSwim = Swim
+  enum Triathlon(val metres: Int):
+    case Swim extends Triathlon(400)
+    case Cycle extends Triathlon(5000)
+    case Run extends Triathlon(2500)
 
-  //enum - if statement
-  import TriathlonDistance.*
-  def triathlon(tri: TriathlonDistance): String =
-    if tri == Run then "let's run!"
-    else if tri == Cycle then "let's cycle!"
-    else "let's swim!"
-
-  //enum - match statement
-  def triathlon2(triathlon: TriathlonDistance): String = triathlon match {
-    case s @ Swim => s"let's swim ${s.metres}!"
-    case c @ Cycle => s"let's cycle ${c.metres}!"
-    case r @ Run => s"let's run ${r.metres}!"
+  import Triathlon.*
+  def howManyMetres(triathlon: Triathlon): Int = triathlon match {
+    case s @ Swim => s.metres
+    case c @ Cycle => c.metres
+    case r @ Run => r.metres
   }
 
   // challenge
-  case class Country(name: String, capital: String, population: Int)
+  case class Country(name: String, population: Int)
   def population(country: Country): Int = country.population
+
+  enum UnitedKingdom:
+    case England, NorthernIreland, Scotland, Wales
+
+  import UnitedKingdom.*
+  val country = England
+  if country == Scotland then println("we're in scotland!")
+
+  def whereAmI(country: UnitedKingdom) = country match {
+    case England => "I'm in England!"
+    case NorthernIreland => "I'm in Northern Ireland!"
+    case Scotland => "I'm in Scotland!"
+    case Wales => "I'm in Wales!"
+  }
+
+  // actual challenge used
+  case class TicketPrice(standardTicketPrice: Int, firstClassTicketPrice: Option[Int])
+
+  def getFirstClassTicketPrice(ticketPrice: Option[TicketPrice]): Option[Int] =
+    ticketPrice.flatMap(_.firstClassTicketPrice)
+
+  def getFirstClassTicketPrice2(ticketPrice: Option[TicketPrice]): Option[Int] =
+    for
+      t <- ticketPrice
+      firstClassPrice <- t.firstClassTicketPrice
+    yield firstClassPrice
+  end getFirstClassTicketPrice2
+
+  val londonToParis = TicketPrice(100, Some(200))
+  println(getFirstClassTicketPrice2(Some(londonToParis)))
+
+  //more code ideas that I'm not using
   enum Continent(val population: Int):
     case Africa extends Continent(000)
     case America extends Continent(000)

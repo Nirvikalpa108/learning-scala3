@@ -1,5 +1,3 @@
-import Example.mulan
-
 object Option {
   val middleName: Option[String] = None
   val middleName2: Option[String] = Some("Muna")
@@ -25,10 +23,27 @@ object Option {
     averageRating = (googleRating + netflixRating) / 2
   } yield netflixRating
 
-  val averageRating2 = for {
+  val averageRating2 = for
     rating <- mulan.rating
     googleRating <- rating.googleRating
     netflixRating <- rating.netflixRating
     averageRating = (googleRating + netflixRating) / 2
-  } yield averageRating
+   yield averageRating
+  end averageRating2
+
+  // challenge
+  case class TicketPrice(
+     standardTicketPrice: Int, 
+     firstClassTicketPrice: Option[Int]
+  )
+  def getFirstClassTicketPrice(ticket: Option[TicketPrice]): Option[Int] = 
+    ticket.flatMap(_.firstClassTicketPrice)
+  def getFirstClassTicketPrice2(ticket: Option[TicketPrice]): Option[Int] =
+    for
+      t <- ticket
+      firstClassPrice <- t.firstClassTicketPrice
+    yield firstClassPrice
+  end getFirstClassTicketPrice2
+  
+  val londonToParis = TicketPrice(100, Some(200))
 }
