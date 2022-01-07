@@ -11,7 +11,7 @@ object DomainModelling {
   def greeting(person: Person): String = s"hi ${person.name}"
   greeting(anne)
 
-  //enumeration
+  //enumeration research - not actually used in the video
   //https://docs.scala-lang.org/scala3/book/domain-modeling-tools.html#enums
   enum CrustSize:
     case Small, Medium, Large
@@ -36,6 +36,7 @@ object DomainModelling {
 //  import Color.*
 //  val c = Red
 
+// this is the code I actually show in the video
   enum TrafficLight:
     case Red, Amber, Green
 

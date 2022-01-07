@@ -26,7 +26,16 @@ object ControlFlow {
     case "Ada" | "Deji" => "hi my friend! Long time no see!"
     case newFriend => s"hi $newFriend! It's so nice to meet you!"
 
-  //Challenge
+  // Challenge
+  // competition
+  // result :  Int
+  // : String
+  // 1 -> gold
+  // 2 -> silver
+  // 3 -> bronze
+  // _ -> well done!
+
+  // Solution
   def competition(result: Int): String =
     if result == 1 then "gold"
     else if result == 2 then "silver"

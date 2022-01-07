@@ -38,7 +38,7 @@ object Lists {
     if name.contains("j")
   } yield name.toUpperCase
 
-  def combinations(xs: List[Int], ys: List[Int]): List[(Int, Int)] =
+  def combination(xs: List[Int], ys: List[Int]): List[(Int, Int)] =
     for {
       x <- xs
       y <- ys
@@ -53,10 +53,6 @@ object Lists {
     Destination("Birmingham", 180),
     Destination("Edinburgh", 420)
   )
-  val head2 = destinations.head
-  val tail2 = destinations.tail
-  val sortedByCityName = destinations.sortBy(_.city)
-  val sortedByJourneyTime = destinations.sortBy(_.journeyTime)
 
   def nearbyTrips(destinations: List[Destination]): List[String] =
     for {
@@ -68,4 +64,9 @@ object Lists {
       if d.journeyTime < 120 then List(d.city) else Nil
     }
   end nearbyTrips
+
+  val head2 = destinations.head
+  val tail2 = destinations.tail
+  val sortedByCityName = destinations.sortBy(_.city)
+  val sortedByJourneyTime = destinations.sortBy(_.journeyTime)
 }

@@ -1,7 +1,7 @@
 object Option {
   val middleName: Option[String] = None
   val middleName2: Option[String] = Some("Muna")
-  middleName2.getOrElse("").length
+  val middleNameLength = middleName2.getOrElse("").length
 
   middleName2.map(word => word.toUpperCase)
 
@@ -31,7 +31,12 @@ object Option {
    yield averageRating
   end averageRating2
 
-  // challenge
+  // solution in the REPL
+  val number: Option[Int] = Some(5)
+  number.map(n => n * 2)
+  number.map(_ * 2)
+
+  // solution in the IDE
   case class TicketPrice(
      standardTicketPrice: Int, 
      firstClassTicketPrice: Option[Int]
