@@ -1,5 +1,4 @@
-object Lists {
-  // intro
+object Chapter6e {
   val intList: List[Int] = List(1,2,3,4,5)
   val emptyList: List[Int] = List()
   val emptyList2: List[Int] = Nil
@@ -12,22 +11,16 @@ object Lists {
   val length = intList2.length
   val drop = intList.drop(1)
   val take = intList.take(1)
-  //contains
-  //exists
 
-  // map
   val map = intList.map(i => i * 2)
   val mapSyntacticSugar = intList.map(_ * 2)
-  // filter
 
-  //flatMap
   def elementAndAddOne(ns: List[Int]): List[Int] = ns.flatMap(n => List(n, n + 1))
   val names = List("Amina", "Majeed")
-  names.map(_.toUpperCase)
-  names.map(_.toUpperCase).flatten
-  names.flatMap(_.toUpperCase)
+  val namesUpperCase = names.map(_.toUpperCase)
+  val namesUpperCase2 = names.map(_.toUpperCase).flatten
+  val namesUpperCase3 = names.flatMap(_.toUpperCase)
 
-  //for comp
   for {
     i <- intList
     if i > 5
@@ -59,10 +52,6 @@ object Lists {
       destination <- destinations
       if destination.journeyTime < 120
     } yield destination.city
-  //destinations.filter(d => d.journeyTime < 2).map(_.city)
-    destinations.flatMap { d =>
-      if d.journeyTime < 120 then List(d.city) else Nil
-    }
   end nearbyTrips
 
   val head2 = destinations.head

@@ -1,4 +1,4 @@
-object Option {
+object Chapter5b {
   val middleName: Option[String] = None
   val middleName2: Option[String] = Some("Muna")
   val middleNameLength = middleName2.getOrElse("").length
@@ -28,27 +28,6 @@ object Option {
     googleRating <- rating.googleRating
     netflixRating <- rating.netflixRating
     averageRating = (googleRating + netflixRating) / 2
-   yield averageRating
+  yield averageRating
   end averageRating2
-
-  // solution in the REPL
-  val number: Option[Int] = Some(5)
-  number.map(n => n * 2)
-  number.map(_ * 2)
-
-  // solution in the IDE
-  case class TicketPrice(
-     standardTicketPrice: Int, 
-     firstClassTicketPrice: Option[Int]
-  )
-  def getFirstClassTicketPrice(ticket: Option[TicketPrice]): Option[Int] = 
-    ticket.flatMap(_.firstClassTicketPrice)
-  def getFirstClassTicketPrice2(ticket: Option[TicketPrice]): Option[Int] =
-    for
-      t <- ticket
-      firstClassPrice <- t.firstClassTicketPrice
-    yield firstClassPrice
-  end getFirstClassTicketPrice2
-  
-  val londonToParis = TicketPrice(100, Some(200))
 }
