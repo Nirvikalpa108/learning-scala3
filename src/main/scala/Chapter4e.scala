@@ -5,7 +5,10 @@ object Chapter4e {
   val anne: Person = Person("Anne", 35)
   val anneName = anne.name
   val anneAge = anne.age
+  def greeting(person: Person): String = s"hi ${person.name}"
+  // try to change the age - case classes are immutable
   val anneWithAmendedAge = anne.copy(age = 36)
+  // create a Person with no age - compiler is keeping us to our contractca
 
   // enumerations
   enum TrafficLight:
