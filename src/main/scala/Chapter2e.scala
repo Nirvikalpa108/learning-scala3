@@ -10,6 +10,5 @@ object Chapter2e {
   // challenge
   def product(n1: Int, n2: Int): Int = n1 * n2
 
-  def greeting(name: String = "Julia") =
-    if name == "Amina" then "Hi, nice to meet you again!" else s"Hello, my name is $name"
+  def greeting(name: String = "stranger") = s"Hi, $name!"
 }
